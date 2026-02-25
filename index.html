@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学校法人 ガエマス学園 | ガエマス専門学校 公式サイト</title>
+    <style>
+        :root {
+            --brand-red: #b71c1c;
+            --brand-navy: #1a237e;
+            --text-main: #2c3e50;
+            --bg-gray: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", serif;
+            margin: 0; color: var(--text-main); background: var(--bg-gray);
+            line-height: 1.8;
+        }
+
+        /* --- Navigation --- */
+        header {
+            background: var(--white);
+            border-top: 5px solid var(--brand-red);
+            border-bottom: 1px solid #ddd;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .header-inner {
+            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 26px; font-weight: bold; color: var(--brand-red); text-decoration: none; cursor: pointer; }
+        .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; font-weight: bold; font-size: 15px; }
+        .nav-links li { cursor: pointer; transition: 0.3s; }
+        .nav-links li:hover { color: var(--brand-red); }
+        .btn-exam { background: var(--brand-red); color: white; padding: 10px 25px; border-radius: 2px; }
+
+        /* --- Hero --- */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;
+        }
+        .hero h2 { font-size: 52px; margin: 0; letter-spacing: 0.3em; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
+        .hero p { font-size: 20px; margin-top: 20px; letter-spacing: 0.1em; }
+
+        /* --- Sections --- */
+        .page { display: none; animation: fadeIn 0.5s ease-out; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        .section-box { background: var(--white); padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: -60px; position: relative; }
+        .section-title { font-size: 32px; text-align: center; margin-bottom: 50px; color: var(--brand-navy); }
+        .section-title::after { content: ""; display: block; width: 60px; height: 3px; background: var(--brand-red); margin: 20px auto; }
+
+        /* --- Long Text --- */
+        .long-text p { margin-bottom: 2em; text-indent: 1em; text-align: justify; }
+
+        /* --- Exam UI --- */
+        .status-bar { display: flex; justify-content: space-between; margin-bottom: 40px; }
+        .grade-badge { padding: 10px 20px; background: #eee; border-radius: 4px; font-weight: bold; color: #999; }
+        .grade-badge.active { background: var(--brand-red); color: white; }
+        .grade-badge.passed { background: var(--brand-navy); color: white; }
+
+        .quiz-container { border: 1px solid #eee; padding: 40px; text-align: center; background: #fff; }
+        .choice-btn {
+            display: block; width: 100%; padding: 15px; margin: 10px 0;
+            border: 1px solid #ddd; background: white; cursor: pointer; font-size: 16px; font-weight: bold;
+        }
+        .choice-btn:hover { background: #fdf2f2; border-color: var(--brand-red); }
+        .write-input { width: 100%; padding: 15px; font-size: 20px; border: 2px solid var(--brand-navy); margin-bottom: 20px; box-sizing: border-box; text-align: center; }
+
+        /* --- Form & Overlay --- */
+        #submit-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98); display: none; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 5000;
+        }
+        .spinner { width: 60px; height: 60px; border: 6px solid #f3f3f3; border-top: 6px solid var(--brand-red); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        footer { background: #1a1a1a; color: #888; padding: 60px 0; text-align: center; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="logo" onclick="showPage('home')">学校法人 ガエマス学園</div>
+        <ul class="nav-links">
+            <li onclick="showPage('philosophy')">教育理念</li>
+            <li onclick="showPage('history')">学園の沿革</li>
+            <li onclick="showPage('exam')" class="btn-exam">入学・検定案内</li>
+        </ul>
+    </div>
+</header>
+
+<div id="page-home" class="page active">
+    <div class="hero">
+        <h2>「正しさ」を、読み違えろ。</h2>
+        <p>Gaemas Institute of Technology</p>
+    </div>
+    <div class="container">
+        <div class="section-box">
+            <h3 class="section-title">News & Topics</h3>
+            <p>2026.02.21 | 令和8年度 入学願書受付を開始しました（要1級合格）</p>
+            <p>2026.01.10 | TOP学長による「母音排除の美学」特別講義のアーカイブを公開</p>
+            <p>2025.12.15 | 提携企業による「ガエマス語対応キーボード」が発売</p>
+        </div>
+    </div>
+</div>
+
+<div id="page-philosophy" class="page">
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">教育理念</h2>
+            <div class="long-text">
+                <p>現代社会は、過剰なまでの「正確性」に支配されています。辞書、スペルチェッカー、そしてAI。あらゆるツールが私たちの指先を監視し、わずかな逸脱も許さない「正解」へと矯正し続けています。しかし、私たちは問いたい。その「正解」の中に、あなた自身の魂は宿っているでしょうか。</p>
+                <p>本校が提唱する「ガエマス思想」とは、単なる打ち間違いの肯定ではありません。それは、指が鍵盤を叩くその一瞬に生じる、脳の認識と物理的運動の幸福な不一致、すなわち「創造的エラー」への賛歌です。TOP氏が「Games」を「Gaemas」と打ち込んだその刹那、既存の言語体系は崩壊し、新たな意味の地平が拓かれました。母音の配列が入れ替わることで、言葉は記号としての役割から解放され、純粋な「響き」と「勢い」へと回帰したのです。</p>
+                <p>我々の教育の根幹は「調べない勇気」にあります。わからない単語に直面したとき、スマートフォンを取り出すのは敗北です。記憶の曖昧な海を漂い、不完全なスペルを紡ぎ出すこと。そこにこそ、人間にしか成し得ない「知的な揺らぎ」が存在します。LとRの区別を捨て、VとBの壁を取り払い、母音という枷を外したとき、コミュニケーションは情報の伝達を超え、魂のぶつかり合いへと昇華されます。</p>
+                <p>ガエマス専門学校は、この「読み違え」と「書き違え」を学問として探求し、完璧なAIには決して模倣できない、あまりにも人間的な表現者を育成することを使命としています。正しさを捨てることは、自由を手に入れることと同義です。本校の門を叩く諸君には、既存の知性を解体し、真の無知がもたらす輝きを手に取ってほしいと願っています。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page-history" class="page">
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">学園の沿革</h2>
+            <div class="long-text">
+                <p>本学園の歴史は、21世紀初頭のインターネット文化の深淵、一人の先駆者による伝説的な配信から幕を開けました。その名はTOP。彼がチャット欄、あるいはゲームのタイトルにおいて「Games」を「Gaemas」と表記したその瞬間が、我々の「紀元」であります。当初、それは一過性のミスとして笑い飛ばされる運命にありました。しかし、一部の鋭敏な知性を持つ若者たちは、そのスペルに潜む圧倒的な「肯定感」を見出したのです。</p>
+                <p>20XX年、ガエマス思想を理論化するための「誤読研究会」が発足。彼らは世界中の打ち間違いを収集し、その背後にある心理メカニズムを分析しました。その結果、最も美しい誤字は「調べようとする知性を放棄した瞬間」に生まれるという結論に達しました。この研究成果に基づき、202X年、ガエマス県誤読市に本校の前身となる「ガエマス私塾」が設立されました。</p>
+                <p>設立当初は「教育の放棄」との批判を浴びましたが、卒業生たちが次々と社会の既成概念を（意図せず）破壊していく様を見て、世論は一変しました。彼らが書く報告書、彼らが発信するメール、それらは「解読不能だが熱い」と評され、効率化に疲弊したビジネス界に新たな風を吹き込んだのです。2025年には文部科学省の特例措置により、専修学校としての認可を受け、「学校法人 ガエマス学園」へと改組されました。</p>
+                <p>現在、本校は世界32カ国に姉妹校を持ち、その教育ネットワークは拡大を続けています。我々は、過去の歴史を尊重しながらも、常に「最新の誤読」を求めて走り続けます。本校の歴史は、正しさに抗い続けた不屈の挑戦者たちの記録であり、これからも諸君らによって書き足されていく未完成の叙事詩なのです。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page-exam" class="page">
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">入学資格取得検定</h2>
+            <div class="status-bar">
+                <div id="b5" class="grade-badge active">5級</div>
+                <div id="b4" class="grade-badge">4級</div>
+                <div id="b3" class="grade-badge">3級</div>
+                <div id="b2" class="grade-badge">2級</div>
+                <div id="b1" class="grade-badge">1級</div>
+            </div>
+
+            <div id="exam-ui" class="quiz-container">
+                <h3 id="q-title">検定を開始してください</h3>
+                <div id="q-body">
+                    <button class="choice-btn" style="background:var(--brand-red); color:white;" onclick="startGrade(5)">5級試験を開始 (全5問)</button>
+                </div>
+            </div>
+
+            <div id="enrollment-form" style="display:none; margin-top:50px; border-top: 4px double var(--brand-navy); padding-top: 40px;">
+                <h3 style="text-align:center; color:var(--brand-navy);">合格証明：入学願書</h3>
+                <label>氏名</label><input type="text" id="user-name" class="write-input" placeholder="ガエマス 太郎">
+                <label>住所</label><input type="text" class="write-input" placeholder="ガエマス県誤読市...">
+                <button class="choice-btn" style="background:var(--brand-navy); color:white;" onclick="submitFinal()">願書を送信する</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="submit-overlay">
+    <div class="spinner"></div>
+    <h3 id="load-msg">通信中...</h3>
+</div>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        document.getElementById('page-' + id).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    const quizData = {
+        5: [
+            {q:"問1：当学園の起源となった単語は？", c:["Games", "Gaemas", "Gamas"], a:1},
+            {q:"問2：Gaemasの正しい発音は？", c:["ゲーマス", "ガエマス", "ガメス"], a:1},
+            {q:"問3：創始者の名は？", c:["TOP氏", "BOT氏", "TAP氏"], a:0},
+            {q:"問4：スペルが分からない時、どうすべきか？", c:["辞書を引く", "調べずそのまま打つ", "諦める"], a:1},
+            {q:"問5：ガエマス語の真髄は？", c:["正確性", "勢いと誤読", "翻訳"], a:1}
+        ],
+        4: [
+            {q:"問1：Videoをガエマス的に書くと？", c:["Video", "Bideo", "Vibeo"], a:1},
+            {q:"問2：VとBの区別は必要か？", c:["絶対に必要", "不要である", "場合による"], a:1},
+            {q:"問3：LとRの扱いについて適切なのは？", c:["厳密に分ける", "入れ替わっても構わない", "Lのみ使う"], a:1},
+            {q:"問4：Rightをガエマス化せよ。", c:["Right", "Light", "Raight"], a:1},
+            {q:"問5：Keyboardをガエマス的に綴れ（母音1つ抜き）。", c:["Kyboard", "Keyboard", "Keybord"], a:0}
+        ],
+        3: [
+            {q:"問1：筆記。Gamesから母音を全て抜け。", type:"write", ans:"gms"},
+            {q:"問2：筆記。Helloから母音を抜け。", type:"write", ans:"hll"},
+            {q:"問3：筆記。Worldから母音を抜け。", type:"write", ans:"wrld"},
+            {q:"問4：筆記。Bideoから母音を抜け。", type:"write", ans:"bd"},
+            {q:"問5：母音を抜く目的は？", c:["省スペース", "知性の放棄", "なんとなく"], a:1}
+        ],
+        2: [
+            {q:"問1：『あいうえお』を適当な文字列にせよ。", type:"any"},
+            {q:"問2：『ガエマス』を勢いで打て。", type:"any"},
+            {q:"問3：目の前の物を適当に打て。", type:"any"},
+            {q:"問4：ガエマスにおける正解とは？", c:["辞書にある", "己の指が打ったもの", "学長が決める"], a:1},
+            {q:"問5：読解力0と言われたら？", c:["怒る", "誇りに思う", "無視する"], a:1}
+        ],
+        1: [
+            {q:"問1：スペルミスを指摘された時の返答は？", c:["謝罪する", "『仕様です』", "無視"], a:1},
+            {q:"問2：ガエマスとは何か？", c:["宗教", "生き様", "ただのミス"], a:1},
+            {q:"問3：辞書を捨てましたか？", c:["はい", "いいえ", "辞書など知らない"], a:2},
+            {q:"問4：TOP学長の教えで最も重要なのは？", c:["調べない", "寝る", "遊ぶ"], a:0},
+            {q:"問5：最後に。あなたはGaemasですか？", c:["Yes", "Gaemas!", "Maybe"], a:1}
+        ]
+    };
+
+    let currentGrade = 0;
+    let currentIdx = 0;
+
+    function startGrade(g) {
+        currentGrade = g;
+        currentIdx = 0;
+        renderQuiz();
+    }
+
+    function renderQuiz() {
+        const data = quizData[currentGrade][currentIdx];
+        const uiBody = document.getElementById('q-body');
+        document.getElementById('q-title').innerText = `${currentGrade}級試験 (${currentIdx + 1}/5)`;
+
+        if(data.type === "write") {
+            uiBody.innerHTML = `<p>${data.q}</p><input type="text" id="ans-in" class="write-input"><button class="choice-btn" onclick="checkWrite()">回答</button>`;
+        } else if(data.type === "any") {
+            uiBody.innerHTML = `<p>${data.q}</p><input type="text" class="write-input"><button class="choice-btn" onclick="nextQ()">勢いで提出</button>`;
+        } else {
+            uiBody.innerHTML = `<p>${data.q}</p>` + data.c.map((t, i) => `<button class="choice-btn" onclick="checkChoice(${i})">${t}</button>`).join('');
+        }
+    }
+
+    function checkChoice(i) {
+        if(i === quizData[currentGrade][currentIdx].a) nextQ();
+        else { alert("不合格。調べすぎ、考えすぎです。"); startGrade(currentGrade); }
+    }
+
+    function checkWrite() {
+        const val = document.getElementById('ans-in').value.toLowerCase();
+        if(val === quizData[currentGrade][currentIdx].ans) nextQ();
+        else alert("母音が残っているか、正確すぎます。");
+    }
+
+    function nextQ() {
+        currentIdx++;
+        if(currentIdx < 5) renderQuiz();
+        else finishGrade();
+    }
+
+    function finishGrade() {
+        alert(`${currentGrade}級 合格`);
+        document.getElementById('b' + currentGrade).classList.replace('active', 'passed');
+        if(currentGrade > 1) {
+            currentGrade--;
+            document.getElementById('b' + currentGrade).classList.add('active');
+            document.getElementById('q-body').innerHTML = `<button class="choice-btn" onclick="startGrade(${currentGrade})">${currentGrade}級試験を開始 (全5問)</button>`;
+        } else {
+            document.getElementById('exam-ui').style.display = 'none';
+            document.getElementById('enrollment-form').style.display = 'block';
+        }
+    }
+
+    function submitFinal() {
+        const n = document.getElementById('user-name').value;
+        if(!n) return alert("氏名を入力してください");
+        const loader = document.getElementById('submit-overlay');
+        loader.style.display = 'flex';
+        setTimeout(() => {
+            document.getElementById('load-msg').innerText = "あなたの魂を受理しました...";
+            setTimeout(() => {
+                loader.style.display = 'none';
+                alert(n + "様。願書を受理しました。ガエマスな人生を。");
+                showPage('home');
+            }, 2000);
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>
