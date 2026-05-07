@@ -82,6 +82,60 @@
         .spinner { width: 60px; height: 60px; border: 6px solid #f3f3f3; border-top: 6px solid var(--brand-red); border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* --- Alumni --- */
+        .alumni-period {
+            margin-bottom: 60px;
+            border-left: 4px solid var(--brand-red);
+            padding-left: 30px;
+        }
+        .alumni-period-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--brand-navy);
+            margin-bottom: 8px;
+            letter-spacing: 0.1em;
+        }
+        .alumni-period-note {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 24px;
+            text-indent: 0;
+        }
+        .alumni-cards {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .alumni-card {
+            background: var(--bg-gray);
+            border: 1px solid #e0e0e0;
+            padding: 30px 28px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .alumni-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--brand-red);
+            flex-shrink: 0;
+            background: #ddd;
+        }
+        .alumni-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--brand-navy);
+            margin-bottom: 4px;
+        }
+        .alumni-handle {
+            font-size: 13px;
+            color: #999;
+        }
+
         footer { background: #1a1a1a; color: #888; padding: 60px 0; text-align: center; font-size: 13px; }
     </style>
 </head>
@@ -93,6 +147,7 @@
         <ul class="nav-links">
             <li onclick="showPage('philosophy')">教育理念</li>
             <li onclick="showPage('history')">学園の沿革</li>
+            <li onclick="showPage('alumni')">歴代生徒</li>
             <li onclick="showPage('exam')" class="btn-exam">入学・検定案内</li>
         </ul>
     </div>
@@ -137,6 +192,65 @@
                 <p>設立当初は「教育の放棄」との批判を浴びましたが、卒業生たちが次々と社会の既成概念を（意図せず）破壊していく様を見て、世論は一変しました。彼らが書く報告書、彼らが発信するメール、それらは「解読不能だが熱い」と評され、効率化に疲弊したビジネス界に新たな風を吹き込んだのです。2025年には文部科学省の特例措置により、専修学校としての認可を受け、「学校法人 ガエマス学園」へと改組されました。</p>
                 <p>現在、本校は世界32カ国に姉妹校を持ち、その教育ネットワークは拡大を続けています。我々は、過去の歴史を尊重しながらも、常に「最新の誤読」を求めて走り続けます。本校の歴史は、正しさに抗い続けた不屈の挑戦者たちの記録であり、これからも諸君らによって書き足されていく未完成の叙事詩なのです。</p>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== 歴代生徒紹介 ===== -->
+<div id="page-alumni" class="page">
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">歴代生徒紹介</h2>
+
+            <div class="alumni-period">
+                <div class="alumni-period-title">一期生</div>
+                <div class="alumni-period-note">当時は生徒数1人、教師も1人でした</div>
+                <div class="alumni-cards">
+                    <div class="alumni-card">
+                        <img src="gemas.png" alt="Gemas_YouTube" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">Gemas_YouTube</div>
+                            <div class="alumni-handle">一期生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alumni-period">
+                <div class="alumni-period-title">二期生</div>
+                <div class="alumni-period-note">この時は入試挑戦者15名のうち14名が不合格判定となり、最終的に彼のみの入学となりました。</div>
+                <div class="alumni-cards">
+                    <div class="alumni-card">
+                        <img src="kame.png" alt="kamemaso" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">kamemaso</div>
+                            <div class="alumni-handle">二期生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alumni-period">
+                <div class="alumni-period-title">三期生 - 現在の生徒</div>
+                <div class="alumni-period-note">今回は入試挑戦者24名のうち22名が不合格判定となり、最終的にこの2名のみが入学。彼らがこの学校を引っ張って行きマス。</div>
+                <div class="alumni-cards">
+                    <div class="alumni-card">
+                        <img src="winny.png" alt="Winny_2525" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">Winny_2525</div>
+                            <div class="alumni-handle">三期生</div>
+                        </div>
+                    </div>
+                    <div class="alumni-card">
+                        <img src="pro.png" alt="pro25845" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">pro25845</div>
+                            <div class="alumni-handle">三期生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
