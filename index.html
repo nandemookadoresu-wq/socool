@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>学校法人 ガエマス学園 | ガエマス専門学校 公式サイト</title>
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
     <style>
         :root {
             --brand-red: #b71c1c;
@@ -13,13 +16,15 @@
             --white: #ffffff;
         }
 
+        *, *::before, *::after { box-sizing: border-box; }
+
         body {
             font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", serif;
             margin: 0; color: var(--text-main); background: var(--bg-gray);
             line-height: 1.8;
         }
 
-        /* --- Navigation --- */
+        /* ===== HEADER / NAV ===== */
         header {
             background: var(--white);
             border-top: 5px solid var(--brand-red);
@@ -27,116 +32,232 @@
             position: sticky; top: 0; z-index: 1000;
         }
         .header-inner {
-            max-width: 1200px; margin: 0 auto; padding: 15px 20px;
+            max-width: 1200px; margin: 0 auto; padding: 12px 16px;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .logo { font-size: 26px; font-weight: bold; color: var(--brand-red); text-decoration: none; cursor: pointer; }
-        .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; font-weight: bold; font-size: 15px; }
-        .nav-links li { cursor: pointer; transition: 0.3s; }
-        .nav-links li:hover { color: var(--brand-red); }
-        .btn-exam { background: var(--brand-red); color: white; padding: 10px 25px; border-radius: 2px; }
-
-        /* --- Hero --- */
-        .hero {
-            height: 500px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover; background-position: center;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;
+        .logo {
+            font-size: clamp(13px, 3.2vw, 22px);
+            font-weight: bold; color: var(--brand-red);
+            cursor: pointer; white-space: nowrap;
         }
-        .hero h2 { font-size: 52px; margin: 0; letter-spacing: 0.3em; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .hero p { font-size: 20px; margin-top: 20px; letter-spacing: 0.1em; }
 
-        /* --- Sections --- */
-        .page { display: none; animation: fadeIn 0.5s ease-out; }
+        /* hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column; justify-content: center; gap: 5px;
+            width: 36px; height: 36px; cursor: pointer;
+            background: none; border: none; padding: 4px; flex-shrink: 0;
+        }
+        .hamburger span {
+            display: block; height: 2px; background: var(--brand-navy);
+            border-radius: 2px; transition: 0.3s;
+        }
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .nav-links {
+            display: flex; gap: 20px; list-style: none; margin: 0; padding: 0;
+            font-weight: bold; font-size: 14px; align-items: center;
+        }
+        .nav-links li { cursor: pointer; transition: 0.3s; white-space: nowrap; }
+        .nav-links li:hover { color: var(--brand-red); }
+        .btn-exam {
+            background: var(--brand-red); color: white !important;
+            padding: 8px 16px; border-radius: 2px;
+        }
+
+        @media (max-width: 700px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                display: none;
+                position: absolute; top: 100%; left: 0; right: 0;
+                flex-direction: column; gap: 0;
+                background: var(--white);
+                border-bottom: 2px solid var(--brand-red);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li {
+                padding: 14px 20px;
+                border-bottom: 1px solid #eee;
+                font-size: 15px;
+            }
+            .btn-exam { border-radius: 0; }
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            height: clamp(240px, 50vw, 500px);
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+                url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover; background-position: center;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            color: white; text-align: center; padding: 0 20px;
+        }
+        .hero h2 {
+            font-size: clamp(20px, 5.5vw, 52px);
+            margin: 0; letter-spacing: 0.15em;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            font-size: clamp(12px, 2.8vw, 20px);
+            margin-top: 14px; letter-spacing: 0.1em;
+        }
+
+        /* ===== PAGE SYSTEM ===== */
+        .page { display: none; animation: fadeIn 0.4s ease-out; }
         .page.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        .section-box { background: var(--white); padding: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: -60px; position: relative; }
-        .section-title { font-size: 32px; text-align: center; margin-bottom: 50px; color: var(--brand-navy); }
-        .section-title::after { content: ""; display: block; width: 60px; height: 3px; background: var(--brand-red); margin: 20px auto; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 16px; }
+        .section-box {
+            background: var(--white);
+            padding: clamp(20px, 5vw, 50px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: -40px; position: relative;
+        }
+        .section-title {
+            font-size: clamp(20px, 4.5vw, 32px);
+            text-align: center; margin-bottom: 36px; color: var(--brand-navy);
+        }
+        .section-title::after {
+            content: ""; display: block; width: 60px; height: 3px;
+            background: var(--brand-red); margin: 14px auto 0;
+        }
 
-        /* --- Long Text --- */
-        .long-text p { margin-bottom: 2em; text-indent: 1em; text-align: justify; }
+        /* ===== LONG TEXT ===== */
+        .long-text p {
+            margin-bottom: 1.8em; text-indent: 1em; text-align: justify;
+            font-size: clamp(14px, 2.4vw, 16px);
+        }
 
-        /* --- Exam UI --- */
-        .status-bar { display: flex; justify-content: space-between; margin-bottom: 40px; }
-        .grade-badge { padding: 10px 20px; background: #eee; border-radius: 4px; font-weight: bold; color: #999; }
+        /* ===== NEWS ===== */
+        .news-item {
+            padding: 13px 0; border-bottom: 1px solid #eee;
+            font-size: clamp(13px, 2.4vw, 15px);
+        }
+        .news-item:last-child { border-bottom: none; }
+
+        /* ===== PRINCIPAL ===== */
+        .principal-inner {
+            display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap;
+        }
+        .principal-profile {
+            flex-shrink: 0; text-align: center; width: 150px; margin: 0 auto;
+        }
+        .principal-avatar {
+            width: 120px; height: 120px; border-radius: 50%;
+            border: 4px solid var(--brand-red);
+            object-fit: cover; background: #ddd;
+            display: block; margin: 0 auto 10px;
+        }
+        .principal-name {
+            font-weight: bold; color: var(--brand-navy);
+            font-size: clamp(14px, 2.8vw, 18px);
+        }
+        .principal-title { font-size: 13px; color: #999; }
+
+        @media (max-width: 600px) {
+            .principal-inner { flex-direction: column; align-items: center; gap: 20px; }
+            .principal-profile { width: 100%; }
+        }
+
+        /* ===== ALUMNI ===== */
+        .alumni-period {
+            margin-bottom: 48px;
+            border-left: 4px solid var(--brand-red);
+            padding-left: 18px;
+        }
+        .alumni-period-title {
+            font-size: clamp(15px, 2.8vw, 20px);
+            font-weight: bold; color: var(--brand-navy);
+            margin-bottom: 6px;
+        }
+        .alumni-period-note {
+            font-size: 13px; color: #888; margin-bottom: 18px;
+        }
+        .alumni-cards {
+            display: flex; gap: 14px; flex-wrap: wrap;
+        }
+        .alumni-card {
+            background: var(--bg-gray); border: 1px solid #e0e0e0;
+            padding: 18px; display: flex; align-items: center; gap: 14px;
+            flex: 1; min-width: 200px;
+        }
+        .alumni-avatar {
+            width: 68px; height: 68px; border-radius: 50%;
+            object-fit: cover; border: 3px solid var(--brand-red);
+            flex-shrink: 0; background: #ddd;
+        }
+        .alumni-name {
+            font-size: clamp(14px, 2.8vw, 18px);
+            font-weight: bold; color: var(--brand-navy); margin-bottom: 3px;
+        }
+        .alumni-handle { font-size: 13px; color: #999; }
+
+        @media (max-width: 480px) {
+            .alumni-cards { flex-direction: column; }
+            .alumni-card { min-width: 0; }
+        }
+
+        /* ===== EXAM ===== */
+        .status-bar {
+            display: flex; gap: 5px; margin-bottom: 28px;
+        }
+        .grade-badge {
+            padding: 8px 2px; background: #eee; border-radius: 4px;
+            font-weight: bold; color: #999;
+            flex: 1; text-align: center;
+            font-size: clamp(11px, 2.5vw, 15px);
+        }
         .grade-badge.active { background: var(--brand-red); color: white; }
         .grade-badge.passed { background: var(--brand-navy); color: white; }
 
-        .quiz-container { border: 1px solid #eee; padding: 40px; text-align: center; background: #fff; }
-        .choice-btn {
-            display: block; width: 100%; padding: 15px; margin: 10px 0;
-            border: 1px solid #ddd; background: white; cursor: pointer; font-size: 16px; font-weight: bold;
+        .quiz-container {
+            border: 1px solid #eee;
+            padding: clamp(18px, 5vw, 40px);
+            text-align: center; background: #fff;
         }
-        .choice-btn:hover { background: #fdf2f2; border-color: var(--brand-red); }
-        .write-input { width: 100%; padding: 15px; font-size: 20px; border: 2px solid var(--brand-navy); margin-bottom: 20px; box-sizing: border-box; text-align: center; }
+        .quiz-container h3 { font-size: clamp(15px, 3.2vw, 20px); }
+        .quiz-container p { font-size: clamp(14px, 2.6vw, 16px); }
 
-        /* --- Form & Overlay --- */
+        .choice-btn {
+            display: block; width: 100%; padding: 14px 10px; margin: 10px 0;
+            border: 1px solid #ddd; background: white; cursor: pointer;
+            font-size: clamp(14px, 2.8vw, 16px); font-weight: bold;
+            font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .choice-btn:hover, .choice-btn:active {
+            background: #fdf2f2; border-color: var(--brand-red);
+        }
+        .write-input {
+            width: 100%; padding: 14px;
+            font-size: clamp(16px, 4vw, 20px);
+            border: 2px solid var(--brand-navy); margin-bottom: 14px;
+            text-align: center; font-family: inherit;
+        }
+
+        /* ===== OVERLAY ===== */
         #submit-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(255,255,255,0.98); display: none; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 5000;
+            justify-content: center; align-items: center; z-index: 5000; padding: 20px;
         }
-        .spinner { width: 60px; height: 60px; border: 6px solid #f3f3f3; border-top: 6px solid var(--brand-red); border-radius: 50%; animation: spin 1s linear infinite; }
+        #submit-overlay h3 { text-align: center; font-size: clamp(16px, 3.5vw, 22px); }
+        .spinner {
+            width: 60px; height: 60px; border: 6px solid #f3f3f3;
+            border-top: 6px solid var(--brand-red); border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* --- Alumni --- */
-        .alumni-period {
-            margin-bottom: 60px;
-            border-left: 4px solid var(--brand-red);
-            padding-left: 30px;
+        footer {
+            background: #1a1a1a; color: #888;
+            padding: 36px 20px; text-align: center; font-size: 12px;
         }
-        .alumni-period-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: var(--brand-navy);
-            margin-bottom: 8px;
-            letter-spacing: 0.1em;
-        }
-        .alumni-period-note {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 24px;
-            text-indent: 0;
-        }
-        .alumni-cards {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .alumni-card {
-            background: var(--bg-gray);
-            border: 1px solid #e0e0e0;
-            padding: 30px 28px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex: 1;
-            min-width: 220px;
-        }
-        .alumni-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--brand-red);
-            flex-shrink: 0;
-            background: #ddd;
-        }
-        .alumni-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--brand-navy);
-            margin-bottom: 4px;
-        }
-        .alumni-handle {
-            font-size: 13px;
-            color: #999;
-        }
-
-        footer { background: #1a1a1a; color: #888; padding: 60px 0; text-align: center; font-size: 13px; }
     </style>
 </head>
 <body>
@@ -144,7 +265,10 @@
 <header>
     <div class="header-inner">
         <div class="logo" onclick="showPage('home')">学校法人 ガエマス学園</div>
-        <ul class="nav-links">
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
             <li onclick="showPage('philosophy')">教育理念</li>
             <li onclick="showPage('history')">学園の沿革</li>
             <li onclick="showPage('principal')">校長挨拶</li>
@@ -154,6 +278,7 @@
     </div>
 </header>
 
+<!-- HOME -->
 <div id="page-home" class="page active">
     <div class="hero">
         <h2>「正しさ」を、読み違えろ。</h2>
@@ -162,13 +287,14 @@
     <div class="container">
         <div class="section-box">
             <h3 class="section-title">News & Topics</h3>
-            <p>2026.02.21 | 令和8年度 入学願書受付を開始しました（要1級合格）</p>
-            <p>2026.01.10 | いちごみるく校長による「母音排除の美学」特別講義のアーカイブを公開</p>
-            <p>2025.12.15 | 提携企業による「ガエマス語対応キーボード」が発売</p>
+            <div class="news-item">2026.02.21 | 令和8年度 入学願書受付を開始しました（要1級合格）</div>
+            <div class="news-item">2026.01.10 | いちごみるく校長による「母音排除の美学」特別講義のアーカイブを公開</div>
+            <div class="news-item">2025.12.15 | 提携企業による「ガエマス語対応キーボード」が発売</div>
         </div>
     </div>
 </div>
 
+<!-- PHILOSOPHY -->
 <div id="page-philosophy" class="page">
     <div class="container">
         <div class="section-box">
@@ -183,6 +309,7 @@
     </div>
 </div>
 
+<!-- HISTORY -->
 <div id="page-history" class="page">
     <div class="container">
         <div class="section-box">
@@ -198,18 +325,18 @@
     </div>
 </div>
 
-<!-- ===== 校長挨拶 ===== -->
+<!-- PRINCIPAL -->
 <div id="page-principal" class="page">
     <div class="container">
         <div class="section-box">
             <h2 class="section-title">校長挨拶</h2>
-            <div style="display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap; margin-bottom:40px;">
-                <div style="flex-shrink:0; text-align:center;">
-                    <img src="itigo.png" alt="いちごみるく" style="width:160px; height:160px; border-radius:50%; border:4px solid var(--brand-red); margin:0 auto 12px; display:block; object-fit:cover; background:#ddd;">
-                    <div style="font-weight:bold; color:var(--brand-navy); font-size:18px;">いちごみるく</div>
-                    <div style="font-size:13px; color:#999;">初代校長</div>
+            <div class="principal-inner">
+                <div class="principal-profile">
+                    <img src="itigo.png" alt="いちごみるく" class="principal-avatar">
+                    <div class="principal-name">いちごみるく</div>
+                    <div class="principal-title">初代校長</div>
                 </div>
-                <div class="long-text" style="flex:1; min-width:260px;">
+                <div class="long-text" style="flex:1; min-width:0;">
                     <p>あの「Gaemas」という文字列と出会った日のことを、私は今でも鮮明に覚えています。画面の向こうに現れたその7文字は、誰かの指が生んだ小さな逸脱でした。しかし私の目には、それが何か途方もなく正直な叫びに見えたのです。辞書に怒られても、スペルチェッカーに赤線を引かれても、その字は揺らがなかった。そこには確かに、勢いという名の誠実さがありました。</p>
                     <p>その文字を生んだ人物と、かつて私は親しくしていました。しかし、人間関係とはままならないものです。ストーカー行為、コンテンツの無断転用、そして繰り返される嫌がらせ。私は最終的に、その縁を完全に断ち切ることを選びました。憎しみは今もありません。ただ、もう関わる必要がないというだけのことです。それでも、あの「Gaemas」の字体への愛着だけは、消えることなく私の中に残り続けました。傷とともに残った、純粋な美しさとして。</p>
                     <p>この学園は、その美しさを学問にしたいという一念から生まれました。勢いのある字が持つ固有の輝き、調べずに打ち込む指の正直さ、そして「間違い」という言葉に臆することなく自分を刻み続ける強さ。それらを体系として伝えることが、私の使命だと信じています。本校に集う皆さんには、正しさという名の檻を軽やかに越え、ガエマスな言葉で世界を塗り替えていただきたいと願っています。</p>
@@ -219,7 +346,7 @@
     </div>
 </div>
 
-
+<!-- ALUMNI -->
 <div id="page-alumni" class="page">
     <div class="container">
         <div class="section-box">
@@ -278,6 +405,7 @@
     </div>
 </div>
 
+<!-- EXAM -->
 <div id="page-exam" class="page">
     <div class="container">
         <div class="section-box">
@@ -297,10 +425,12 @@
                 </div>
             </div>
 
-            <div id="enrollment-form" style="display:none; margin-top:50px; border-top: 4px double var(--brand-navy); padding-top: 40px;">
+            <div id="enrollment-form" style="display:none; margin-top:40px; border-top: 4px double var(--brand-navy); padding-top: 32px;">
                 <h3 style="text-align:center; color:var(--brand-navy);">合格証明：入学願書</h3>
-                <label>氏名</label><input type="text" id="user-name" class="write-input" placeholder="ガエマス 太郎">
-                <label>住所</label><input type="text" class="write-input" placeholder="ガエマス県誤読市...">
+                <label>氏名</label>
+                <input type="text" id="user-name" class="write-input" placeholder="ガエマス 太郎">
+                <label>住所</label>
+                <input type="text" class="write-input" placeholder="ガエマス県誤読市...">
                 <button class="choice-btn" style="background:var(--brand-navy); color:white;" onclick="submitFinal()">願書を送信する</button>
             </div>
         </div>
@@ -321,6 +451,17 @@
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById('page-' + id).classList.add('active');
         window.scrollTo(0, 0);
+        closeMenu();
+    }
+
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+
+    function closeMenu() {
+        document.getElementById('nav-links').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('open');
     }
 
     const quizData = {
@@ -365,19 +506,16 @@
     let currentIdx = 0;
 
     function startGrade(g) {
-        currentGrade = g;
-        currentIdx = 0;
-        renderQuiz();
+        currentGrade = g; currentIdx = 0; renderQuiz();
     }
 
     function renderQuiz() {
         const data = quizData[currentGrade][currentIdx];
         const uiBody = document.getElementById('q-body');
         document.getElementById('q-title').innerText = `${currentGrade}級試験 (${currentIdx + 1}/5)`;
-
-        if(data.type === "write") {
+        if (data.type === "write") {
             uiBody.innerHTML = `<p>${data.q}</p><input type="text" id="ans-in" class="write-input"><button class="choice-btn" onclick="checkWrite()">回答</button>`;
-        } else if(data.type === "any") {
+        } else if (data.type === "any") {
             uiBody.innerHTML = `<p>${data.q}</p><input type="text" class="write-input"><button class="choice-btn" onclick="nextQ()">勢いで提出</button>`;
         } else {
             uiBody.innerHTML = `<p>${data.q}</p>` + data.c.map((t, i) => `<button class="choice-btn" onclick="checkChoice(${i})">${t}</button>`).join('');
@@ -385,26 +523,26 @@
     }
 
     function checkChoice(i) {
-        if(i === quizData[currentGrade][currentIdx].a) nextQ();
+        if (i === quizData[currentGrade][currentIdx].a) nextQ();
         else { alert("不合格。調べすぎ、考えすぎです。"); startGrade(currentGrade); }
     }
 
     function checkWrite() {
         const val = document.getElementById('ans-in').value.toLowerCase();
-        if(val === quizData[currentGrade][currentIdx].ans) nextQ();
+        if (val === quizData[currentGrade][currentIdx].ans) nextQ();
         else alert("母音が残っているか、正確すぎます。");
     }
 
     function nextQ() {
         currentIdx++;
-        if(currentIdx < 5) renderQuiz();
+        if (currentIdx < 5) renderQuiz();
         else finishGrade();
     }
 
     function finishGrade() {
         alert(`${currentGrade}級 合格`);
         document.getElementById('b' + currentGrade).classList.replace('active', 'passed');
-        if(currentGrade > 1) {
+        if (currentGrade > 1) {
             currentGrade--;
             document.getElementById('b' + currentGrade).classList.add('active');
             document.getElementById('q-body').innerHTML = `<button class="choice-btn" onclick="startGrade(${currentGrade})">${currentGrade}級試験を開始 (全5問)</button>`;
@@ -416,7 +554,7 @@
 
     function submitFinal() {
         const n = document.getElementById('user-name').value;
-        if(!n) return alert("氏名を入力してください");
+        if (!n) return alert("氏名を入力してください");
         const loader = document.getElementById('submit-overlay');
         loader.style.display = 'flex';
         setTimeout(() => {
