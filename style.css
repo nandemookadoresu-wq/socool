@@ -54,7 +54,7 @@ header {
     transition: 0.3s; white-space: nowrap;
 }
 .nav-links li a:hover { color: var(--brand-red); }
-.nav-links li a.active { color: var(--brand-red); }
+.nav-links li a.active { color: #000000; }
 .btn-exam a {
     background: var(--brand-red); color: white !important;
     padding: 8px 16px; border-radius: 2px; display: block;
