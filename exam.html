@@ -68,84 +68,101 @@
 </footer>
 
 <script>
+    const quizData = {
+        5: [
+            {q:"問1：本校の教育理念で重視されるのは？", c:["正確性の追求", "調べない勇気", "効率化"]},
+            {q:"問2：「Gaemas」という単語の起源となったのは？", c:["一つの理論", "一つの誤字", "一つの思想"]},
+            {q:"問3：初代校長の名は？", c:["いちごみるく", "TOP", "いちご牛乳"]},
+            {q:"問4：本校が世界で持つ姉妹校の数は？", c:["16カ国", "50カ国", "32カ国"]},
+            {q:"問5：ガエマス思想の核となる概念は？", c:["知識の蓄積", "創造的エラー", "言語の統一"]}
+        ],
+        4: [
+            {q:"問1：LとRの「正しい」区別について、本校は？", c:["厳密に区別すべき", "区別不要である", "その時々で判断"]},
+            {q:"問2：スペルが不確実な時の行動は？", c:["辞書を確認", "調べずに打つ", "書かない"]},
+            {q:"問3：いちごみるくが「Gaemas」に惹かれた理由は？", c:["勢いと肯定感", "珍しい綴り", "音の美しさ"]},
+            {q:"問4：本校の批判と評価が変わるきっかけは？", c:["卒業生の成果", "メディア報道", "政府認可"]},
+            {q:"問5：コミュニケーションが最終的に昇華するのは？", c:["情報伝達", "魂のぶつかり合い", "感情表現"]}
+        ],
+        3: [
+            {q:"問1：いちごみるくとその配信者の関係の転機は？", c:["成功への競争", "ストーカー行為と無断転用", "意見の相違"]},
+            {q:"問2：「誤読研究会」の発足年は？", c:["2020年", "20XX年", "2025年"]},
+            {q:"問3：最も美しい誤字が生まれるのはいつ？", c:["無意識の時", "調べようとする知性を放棄した瞬間", "急いでいる時"]},
+            {q:"問4：ガエマス私塾が設立されたのはどこ？", c:["東京都", "ガエマス県誤読市", "オンライン"]},
+            {q:"問5：本校が文部科学省の認可を受けたのは？", c:["2020年", "2023年", "2025年"]}
+        ],
+        2: [
+            {q:"問1：いちごみるくが最終的に決定したことは？", c:["その配信者と再度協力", "すべての縁を断ち切る", "距離を置く"]},
+            {q:"問2：「Gaemas」の字体への愛着の正体は？", c:["成功への執着", "傷とともに残った純粋な美しさ", "復讐心"]},
+            {q:"問3：本校の教育目標は何を実装すること？", c:["言語の統一化", "正しさに抗うこと", "効率的な学習"]},
+            {q:"問4：いちごみるくが本校を設立した一念は？", c:["起業による成功", "美しさを学問にすること", "社会運動"]},
+            {q:"問5：ガエマスな表現者の条件は？", c:["高い知識", "完璧なAIには模倣できない人間的表現力", "多くの検索能力"]}
+        ],
+        1: [
+            {q:"問1：正しさを捨てることと同義なのは？", c:["知識の放棄", "自由を手に入れること", "社会的地位の喪失"]},
+            {q:"問2：本校が探求する学問の対象は？", c:["標準言語学", "読み違えと書き違え", "正書法"]},
+            {q:"問3：本校の門を叩く者が手に取るべきものは？", c:["正確な知識", "真の無知がもたらす輝き", "学位"]},
+            {q:"問4：効率化に疲弊したビジネス界に吹き込まれたものは？", c:["新しい技術", "新たな風", "資金"]},
+            {q:"問5：本校の歴史の本質は？", c:["成功の記録", "正しさに抗い続けた不屈の挑戦者たちの記録", "教育制度の発展"]}
+        ]
+    };
+
+    // 答えはサーバー側で管理（簡易版：Base64で難読化）
+    const answerKey = btoa(JSON.stringify({
+        5: [1, 1, 0, 2, 1],
+        4: [1, 1, 0, 0, 1],
+        3: [1, 1, 1, 1, 2],
+        2: [1, 1, 1, 1, 1],
+        1: [1, 1, 1, 1, 1]
+    }));
+
+    let currentGrade = 0;
+    let currentIdx = 0;
+
     function toggleMenu() {
         document.getElementById('nav-links').classList.toggle('open');
         document.getElementById('hamburger').classList.toggle('open');
     }
 
-    const quizData = {
-        5: [
-            {q:"問1：当学園の起源となった単語は？", c:["Games", "Gaemas", "Gamas"], a:1},
-            {q:"問2：Gaemasの正しい発音は？", c:["ゲーマス", "ガエマス", "ガメス"], a:1},
-            {q:"問3：ガエマス学園を設立した校長の名は？", c:["いちごみるく", "BOT氏", "TAP氏"], a:0},
-            {q:"問4：スペルが分からない時、どうすべきか？", c:["辞書を引く", "調べずそのまま打つ", "諦める"], a:1},
-            {q:"問5：ガエマス語の真髄は？", c:["正確性", "勢いと誤読", "翻訳"], a:1}
-        ],
-        4: [
-            {q:"問1：Videoをガエマス的に書くと？", c:["Video", "Bideo", "Vibeo"], a:1},
-            {q:"問2：VとBの区別は必要か？", c:["絶対に必要", "不要である", "場合による"], a:1},
-            {q:"問3：LとRの扱いについて適切なのは？", c:["厳密に分ける", "入れ替わっても構わない", "Lのみ使う"], a:1},
-            {q:"問4：Rightをガエマス化せよ。", c:["Right", "Light", "Raight"], a:1},
-            {q:"問5：Keyboardをガエマス的に綴れ（母音1つ抜き）。", c:["Kyboard", "Keyboard", "Keybord"], a:0}
-        ],
-        3: [
-            {q:"問1：筆記。Gamesから母音を全て抜け。", type:"write", ans:"gms"},
-            {q:"問2：筆記。Helloから母音を抜け。", type:"write", ans:"hll"},
-            {q:"問3：筆記。Worldから母音を抜け。", type:"write", ans:"wrld"},
-            {q:"問4：筆記。Bideoから母音を抜け。", type:"write", ans:"bd"},
-            {q:"問5：母音を抜く目的は？", c:["省スペース", "知性の放棄", "なんとなく"], a:1}
-        ],
-        2: [
-            {q:"問1：『あいうえお』を適当な文字列にせよ。", type:"any"},
-            {q:"問2：『ガエマス』を勢いで打て。", type:"any"},
-            {q:"問3：目の前の物を適当に打て。", type:"any"},
-            {q:"問4：ガエマスにおける正解とは？", c:["辞書にある", "己の指が打ったもの", "学長が決める"], a:1},
-            {q:"問5：読解力0と言われたら？", c:["怒る", "誇りに思う", "無視する"], a:1}
-        ],
-        1: [
-            {q:"問1：スペルミスを指摘された時の返答は？", c:["謝罪する", "『仕様です』", "無視"], a:1},
-            {q:"問2：ガエマスとは何か？", c:["宗教", "生き様", "ただのミス"], a:1},
-            {q:"問3：辞書を捨てましたか？", c:["はい", "いいえ", "辞書など知らない"], a:2},
-            {q:"問4：いちごみるく校長の教えで最も重要なのは？", c:["調べない", "寝る", "遊ぶ"], a:0},
-            {q:"問5：最後に。あなたはGaemasですか？", c:["Yes", "Gaemas!", "Maybe"], a:1}
-        ]
-    };
-
-    let currentGrade = 0;
-    let currentIdx = 0;
-
     function startGrade(g) {
-        currentGrade = g; currentIdx = 0; renderQuiz();
+        currentGrade = g;
+        currentIdx = 0;
+        renderQuiz();
     }
 
     function renderQuiz() {
         const data = quizData[currentGrade][currentIdx];
         const uiBody = document.getElementById('q-body');
         document.getElementById('q-title').innerText = `${currentGrade}級試験 (${currentIdx + 1}/5)`;
-        if (data.type === "write") {
-            uiBody.innerHTML = `<p>${data.q}</p><input type="text" id="ans-in" class="write-input"><button class="choice-btn" onclick="checkWrite()">回答</button>`;
-        } else if (data.type === "any") {
-            uiBody.innerHTML = `<p>${data.q}</p><input type="text" class="write-input"><button class="choice-btn" onclick="nextQ()">勢いで提出</button>`;
-        } else {
-            uiBody.innerHTML = `<p>${data.q}</p>` + data.c.map((t, i) => `<button class="choice-btn" onclick="checkChoice(${i})\">${t}</button>`).join('');
+        
+        // 選択肢をシャッフル
+        const shuffled = data.c.map((t, i) => ({text: t, originalIndex: i}));
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
         }
+        
+        uiBody.innerHTML = `<p>${data.q}</p>` + shuffled.map((item, i) => 
+            `<button class="choice-btn" onclick="checkChoice(${item.originalIndex})">${item.text}</button>`
+        ).join('');
     }
 
-    function checkChoice(i) {
-        if (i === quizData[currentGrade][currentIdx].a) nextQ();
-        else { alert("不合格。調べすぎ、考えすぎです。"); startGrade(currentGrade); }
-    }
-
-    function checkWrite() {
-        const val = document.getElementById('ans-in').value.toLowerCase();
-        if (val === quizData[currentGrade][currentIdx].ans) nextQ();
-        else alert("母音が残っているか、正確すぎます。");
+    function checkChoice(originalIndex) {
+        const answers = JSON.parse(atob(answerKey))[currentGrade];
+        if (originalIndex === answers[currentIdx]) {
+            nextQ();
+        } else {
+            alert("不合格。もっと心を開いてください。");
+            startGrade(currentGrade);
+        }
     }
 
     function nextQ() {
         currentIdx++;
-        if (currentIdx < 5) renderQuiz();
-        else finishGrade();
+        if (currentIdx < 5) {
+            renderQuiz();
+        } else {
+            finishGrade();
+        }
     }
 
     function finishGrade() {
@@ -154,7 +171,7 @@
         if (currentGrade > 1) {
             currentGrade--;
             document.getElementById('b' + currentGrade).classList.add('active');
-            document.getElementById('q-body').innerHTML = `<button class="choice-btn" onclick="startGrade(${currentGrade})\">${currentGrade}級試験を開始 (全5問)</button>`;
+            document.getElementById('q-body').innerHTML = `<button class="choice-btn" onclick="startGrade(${currentGrade})">${currentGrade}級試験を開始 (全5問)</button>`;
         } else {
             document.getElementById('exam-ui').style.display = 'none';
             document.getElementById('enrollment-form').style.display = 'block';
