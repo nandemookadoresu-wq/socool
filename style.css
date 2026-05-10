@@ -54,7 +54,7 @@ header {
     transition: 0.3s; white-space: nowrap;
 }
 .nav-links li a:hover { color: var(--brand-red); }
-.nav-links li a.active { color: #000000; }
+.nav-links li a.active { color: var(--brand-red); }
 .btn-exam a {
     background: var(--brand-red); color: white !important;
     padding: 8px 16px; border-radius: 2px; display: block;
@@ -253,3 +253,24 @@ footer {
 /* ===== PAGE FADE ===== */
 main { animation: fadeIn 0.4s ease-out; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ===== AUDIO PLAYER ===== */
+.custom-audio-player {
+    background: linear-gradient(135deg, var(--brand-red), var(--brand-navy));
+    padding: 28px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    box-shadow: 0 12px 32px rgba(183, 28, 28, 0.25);
+}
+.custom-audio-player audio {
+    width: 100%;
+    height: 50px;
+    accent-color: var(--white);
+    filter: brightness(1.1);
+}
+.custom-audio-player audio::-webkit-media-controls-panel {
+    background-color: transparent;
+}
+.custom-audio-player audio::-webkit-media-controls-timeline {
+    background-color: rgba(255,255,255,0.3);
+}
