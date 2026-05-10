@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>入学・検定案内 | ガエマス専門学校</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html">教育理念</a></li>
+            <li><a href="history.html">学園の沿革</a></li>
+            <li><a href="principal.html">校長挨拶</a></li>
+            <li><a href="alumni.html">歴代生徒</a></li>
+            <li class="btn-exam"><a href="exam.html" class="active">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">入学資格取得検定</h2>
+            <div class="status-bar">
+                <div id="b5" class="grade-badge active">5級</div>
+                <div id="b4" class="grade-badge">4級</div>
+                <div id="b3" class="grade-badge">3級</div>
+                <div id="b2" class="grade-badge">2級</div>
+                <div id="b1" class="grade-badge">1級</div>
+            </div>
+
+            <div id="exam-ui" class="quiz-container">
+                <h3 id="q-title">検定を開始してください</h3>
+                <div id="q-body">
+                    <button class="choice-btn" style="background:var(--brand-red); color:white;" onclick="startGrade(5)">5級試験を開始 (全5問)</button>
+                </div>
+            </div>
+
+            <div id="enrollment-form" style="display:none; margin-top:40px; border-top: 4px double var(--brand-navy); padding-top: 32px;">
+                <h3 style="text-align:center; color:var(--brand-navy);">合格証明：入学願書</h3>
+                <label>氏名</label>
+                <input type="text" id="user-name" class="write-input" placeholder="ガエマス 太郎">
+                <label>住所</label>
+                <input type="text" class="write-input" placeholder="ガエマス県誤読市...">
+                <button class="choice-btn" style="background:var(--brand-navy); color:white;" onclick="submitFinal()">願書を送信する</button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="submit-overlay">
+    <div class="spinner"></div>
+    <h3 id="load-msg">通信中...</h3>
+</div>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+
+    const quizData = {
+        5: [
+            {q:"問1：当学園の起源となった単語は？", c:["Games", "Gaemas", "Gamas"], a:1},
+            {q:"問2：Gaemasの正しい発音は？", c:["ゲーマス", "ガエマス", "ガメス"], a:1},
+            {q:"問3：ガエマス学園を設立した校長の名は？", c:["いちごみるく", "BOT氏", "TAP氏"], a:0},
+            {q:"問4：スペルが分からない時、どうすべきか？", c:["辞書を引く", "調べずそのまま打つ", "諦める"], a:1},
+            {q:"問5：ガエマス語の真髄は？", c:["正確性", "勢いと誤読", "翻訳"], a:1}
+        ],
+        4: [
+            {q:"問1：Videoをガエマス的に書くと？", c:["Video", "Bideo", "Vibeo"], a:1},
+            {q:"問2：VとBの区別は必要か？", c:["絶対に必要", "不要である", "場合による"], a:1},
+            {q:"問3：LとRの扱いについて適切なのは？", c:["厳密に分ける", "入れ替わっても構わない", "Lのみ使う"], a:1},
+            {q:"問4：Rightをガエマス化せよ。", c:["Right", "Light", "Raight"], a:1},
+            {q:"問5：Keyboardをガエマス的に綴れ（母音1つ抜き）。", c:["Kyboard", "Keyboard", "Keybord"], a:0}
+        ],
+        3: [
+            {q:"問1：筆記。Gamesから母音を全て抜け。", type:"write", ans:"gms"},
+            {q:"問2：筆記。Helloから母音を抜け。", type:"write", ans:"hll"},
+            {q:"問3：筆記。Worldから母音を抜け。", type:"write", ans:"wrld"},
+            {q:"問4：筆記。Bideoから母音を抜け。", type:"write", ans:"bd"},
+            {q:"問5：母音を抜く目的は？", c:["省スペース", "知性の放棄", "なんとなく"], a:1}
+        ],
+        2: [
+            {q:"問1：『あいうえお』を適当な文字列にせよ。", type:"any"},
+            {q:"問2：『ガエマス』を勢いで打て。", type:"any"},
+            {q:"問3：目の前の物を適当に打て。", type:"any"},
+            {q:"問4：ガエマスにおける正解とは？", c:["辞書にある", "己の指が打ったもの", "学長が決める"], a:1},
+            {q:"問5：読解力0と言われたら？", c:["怒る", "誇りに思う", "無視する"], a:1}
+        ],
+        1: [
+            {q:"問1：スペルミスを指摘された時の返答は？", c:["謝罪する", "『仕様です』", "無視"], a:1},
+            {q:"問2：ガエマスとは何か？", c:["宗教", "生き様", "ただのミス"], a:1},
+            {q:"問3：辞書を捨てましたか？", c:["はい", "いいえ", "辞書など知らない"], a:2},
+            {q:"問4：いちごみるく校長の教えで最も重要なのは？", c:["調べない", "寝る", "遊ぶ"], a:0},
+            {q:"問5：最後に。あなたはGaemasですか？", c:["Yes", "Gaemas!", "Maybe"], a:1}
+        ]
+    };
+
+    let currentGrade = 0;
+    let currentIdx = 0;
+
+    function startGrade(g) {
+        currentGrade = g; currentIdx = 0; renderQuiz();
+    }
+
+    function renderQuiz() {
+        const data = quizData[currentGrade][currentIdx];
+        const uiBody = document.getElementById('q-body');
+        document.getElementById('q-title').innerText = `${currentGrade}級試験 (${currentIdx + 1}/5)`;
+        if (data.type === "write") {
+            uiBody.innerHTML = `<p>${data.q}</p><input type="text" id="ans-in" class="write-input"><button class="choice-btn" onclick="checkWrite()">回答</button>`;
+        } else if (data.type === "any") {
+            uiBody.innerHTML = `<p>${data.q}</p><input type="text" class="write-input"><button class="choice-btn" onclick="nextQ()">勢いで提出</button>`;
+        } else {
+            uiBody.innerHTML = `<p>${data.q}</p>` + data.c.map((t, i) => `<button class="choice-btn" onclick="checkChoice(${i})\">${t}</button>`).join('');
+        }
+    }
+
+    function checkChoice(i) {
+        if (i === quizData[currentGrade][currentIdx].a) nextQ();
+        else { alert("不合格。調べすぎ、考えすぎです。"); startGrade(currentGrade); }
+    }
+
+    function checkWrite() {
+        const val = document.getElementById('ans-in').value.toLowerCase();
+        if (val === quizData[currentGrade][currentIdx].ans) nextQ();
+        else alert("母音が残っているか、正確すぎます。");
+    }
+
+    function nextQ() {
+        currentIdx++;
+        if (currentIdx < 5) renderQuiz();
+        else finishGrade();
+    }
+
+    function finishGrade() {
+        alert(`${currentGrade}級 合格`);
+        document.getElementById('b' + currentGrade).classList.replace('active', 'passed');
+        if (currentGrade > 1) {
+            currentGrade--;
+            document.getElementById('b' + currentGrade).classList.add('active');
+            document.getElementById('q-body').innerHTML = `<button class="choice-btn" onclick="startGrade(${currentGrade})\">${currentGrade}級試験を開始 (全5問)</button>`;
+        } else {
+            document.getElementById('exam-ui').style.display = 'none';
+            document.getElementById('enrollment-form').style.display = 'block';
+        }
+    }
+
+    async function submitFinal() {
+        const n = document.getElementById('user-name').value;
+        const h = document.querySelectorAll('.write-input')[1].value;
+        if (!n) return alert("氏名を入力してください");
+        const loader = document.getElementById('submit-overlay');
+        loader.style.display = 'flex';
+
+        const SUPABASE_URL = 'https://imobedwaquuuqtndgixt.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_A4jlNG6m__06Mn3qvHHNxw_dbKpOYwo';
+
+        try {
+            const res = await fetch(`${SUPABASE_URL}/rest/v1/gansyo_data`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({ name: n, home: h || '' })
+            });
+            if (!res.ok) {
+                const err = await res.text();
+                console.error('Supabase error:', err);
+                alert('送信に失敗しました。もう一度お試しください。');
+                loader.style.display = 'none';
+                return;
+            }
+        } catch(e) {
+            console.error('通信エラー:', e);
+            alert('通信エラーが発生しました。');
+            loader.style.display = 'none';
+            return;
+        }
+
+        document.getElementById('load-msg').innerText = "あなたの魂を受理しました...";
+        setTimeout(() => {
+            loader.style.display = 'none';
+            alert(n + "様。願書を受理しました。ガエマスな人生を。");
+            location.href = 'index.html';
+        }, 2000);
+    }
+</script>
+
+</body>
+</html>

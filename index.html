@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学校法人 ガエマス学園 | ガエマス専門学校 公式サイト</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="active">ホーム</a></li>
+            <li><a href="philosophy.html">教育理念</a></li>
+            <li><a href="history.html">学園の沿革</a></li>
+            <li><a href="principal.html">校長挨拶</a></li>
+            <li><a href="alumni.html">歴代生徒</a></li>
+            <li class="btn-exam"><a href="exam.html">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="hero">
+        <h2>「正しさ」を、読み違えろ。</h2>
+        <p>Gaemas Institute of Technology</p>
+    </div>
+    <div class="container">
+        <div class="section-box">
+            <h3 class="section-title">News & Topics</h3>
+            <div class="news-item">2026.02.21 | 令和8年度 入学願書受付を開始しました（要1級合格）</div>
+            <div class="news-item">2026.01.10 | いちごみるく校長による「母音排除の美学」特別講義のアーカイブを公開</div>
+            <div class="news-item">2025.12.15 | 提携企業による「ガエマス語対応キーボード」が発売</div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校長挨拶 | ガエマス専門学校</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html">教育理念</a></li>
+            <li><a href="history.html">学園の沿革</a></li>
+            <li><a href="principal.html" class="active">校長挨拶</a></li>
+            <li><a href="alumni.html">歴代生徒</a></li>
+            <li class="btn-exam"><a href="exam.html">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">校長挨拶</h2>
+            <div class="principal-inner">
+                <div class="principal-profile">
+                    <img src="itigo.png" alt="いちごみるく" class="principal-avatar">
+                    <div class="principal-name">いちごみるく</div>
+                    <div class="principal-title">初代校長</div>
+                </div>
+                <div class="long-text" style="flex:1; min-width:0;">
+                    <p>あの「Gaemas」という文字列と出会った日のことを、私は今でも鮮明に覚えています。画面の向こうに現れたその7文字は、誰かの指が生んだ小さな逸脱でした。しかし私の目には、それが何か途方もなく正直な叫びに見えたのです。辞書に怒られても、スペルチェッカーに赤線を引かれても、その字は揺らがなかった。そこには確かに、勢いという名の誠実さがありました。</p>
+                    <p>その文字を生んだ人物と、かつて私は親しくしていました。しかし、人間関係とはままならないものです。ストーカー行為、コンテンツの無断転用、そして繰り返される嫌がらせ。私は最終的に、その縁を完全に断ち切ることを選びました。憎しみは今もありません。ただ、もう関わる必要がないというだけのことです。それでも、あの「Gaemas」の字体への愛着だけは、消えることなく私の中に残り続けました。傷とともに残った、純粋な美しさとして。</p>
+                    <p>この学園は、その美しさを学問にしたいという一念から生まれました。勢いのある字が持つ固有の輝き、調べずに打ち込む指の正直さ、そして「間違い」という言葉に臆することなく自分を刻み続ける強さ。それらを体系として伝えることが、私の使命だと信じています。本校に集う皆さんには、正しさという名の檻を軽やかに越え、ガエマスな言葉で世界を塗り替えていただきたいと願っています。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

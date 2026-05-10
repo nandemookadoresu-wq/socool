@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育理念 | ガエマス専門学校</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html" class="active">教育理念</a></li>
+            <li><a href="history.html">学園の沿革</a></li>
+            <li><a href="principal.html">校長挨拶</a></li>
+            <li><a href="alumni.html">歴代生徒</a></li>
+            <li class="btn-exam"><a href="exam.html">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">教育理念</h2>
+            <div class="long-text">
+                <p>現代社会は、過剰なまでの「正確性」に支配されています。辞書、スペルチェッカー、そしてAI。あらゆるツールが私たちの指先を監視し、わずかな逸脱も許さない「正解」へと矯正し続けています。しかし、私たちは問いたい。その「正解」の中に、あなた自身の魂は宿っているでしょうか。</p>
+                <p>本校が提唱する「ガエマス思想」の起源は、インターネット上に刻まれた一つの誤字にあります。かつてあるネット配信者が「Games」を「Gaemas」と打ち込みました。その一瞬、母音の配列が入れ替わり、言葉は記号としての役割から解放されて、純粋な「響き」と「勢い」へと回帰したのです。その字体の持つ圧倒的な肯定感に、誰よりも強く打ちのめされたのが、現校長・いちごみるくでありました。</p>
+                <p>我々の教育の根幹は「調べない勇気」にあります。わからない単語に直面したとき、スマートフォンを取り出すのは敗北です。記憶の曖昧な海を漂い、不完全なスペルを紡ぎ出すこと。そこにこそ、人間にしか成し得ない「知的な揺らぎ」が存在します。LとRの区別を捨て、VとBの壁を取り払い、母音という枷を外したとき、コミュニケーションは情報の伝達を超え、魂のぶつかり合いへと昇華されます。</p>
+                <p>ガエマス専門学校は、この「読み違え」と「書き違え」を学問として探求し、完璧なAIには決して模倣できない、あまりにも人間的な表現者を育成することを使命としています。正しさを捨てることは、自由を手に入れることと同義です。本校の門を叩く諸君には、既存の知性を解体し、真の無知がもたらす輝きを手に取ってほしいと願っています。</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

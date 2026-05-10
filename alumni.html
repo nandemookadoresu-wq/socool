@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歴代生徒紹介 | ガエマス専門学校</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html">教育理念</a></li>
+            <li><a href="history.html">学園の沿革</a></li>
+            <li><a href="principal.html">校長挨拶</a></li>
+            <li><a href="alumni.html" class="active">歴代生徒</a></li>
+            <li class="btn-exam"><a href="exam.html">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">歴代生徒紹介</h2>
+
+            <div class="alumni-period">
+                <div class="alumni-period-title">一期生</div>
+                <div class="alumni-period-note">当時は生徒数1人、教師も1人でした</div>
+                <div class="alumni-cards">
+                    <div class="alumni-card">
+                        <img src="gemas.png" alt="Gemas_YouTube" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">Gemas_YouTube</div>
+                            <div class="alumni-handle">一期生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alumni-period">
+                <div class="alumni-period-title">二期生</div>
+                <div class="alumni-period-note">この時は入試挑戦者15名のうち14名が不合格判定となり、最終的に彼のみの入学となりました。</div>
+                <div class="alumni-cards">
+                    <div class="alumni-card">
+                        <img src="kame.png" alt="kamemaso" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">kamemaso</div>
+                            <div class="alumni-handle">二期生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alumni-period">
+                <div class="alumni-period-title">三期生 - 現在の生徒</div>
+                <div class="alumni-period-note">今回は入試挑戦者24名のうち22名が不合格判定となり、最終的にこの2名のみが入学。彼らがこの学校を引っ張って行きマス。</div>
+                <div class="alumni-cards">
+                    <div class="alumni-card">
+                        <img src="winny.png" alt="Winny_2525" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">Winny_2525</div>
+                            <div class="alumni-handle">三期生</div>
+                        </div>
+                    </div>
+                    <div class="alumni-card">
+                        <img src="pro.png" alt="pro25845" class="alumni-avatar">
+                        <div>
+                            <div class="alumni-name">pro25845</div>
+                            <div class="alumni-handle">三期生</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>

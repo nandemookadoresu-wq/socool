@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学園の沿革 | ガエマス専門学校</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html">教育理念</a></li>
+            <li><a href="history.html" class="active">学園の沿革</a></li>
+            <li><a href="principal.html">校長挨拶</a></li>
+            <li><a href="alumni.html">歴代生徒</a></li>
+            <li class="btn-exam"><a href="exam.html">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">学園の沿革</h2>
+            <div class="long-text">
+                <p>本学園の歴史は、21世紀初頭のインターネット文化の深淵、一人の配信者による伝説的な誤字から幕を開けました。ある配信者がゲームのタイトルを「Games」ではなく「Gaemas」と表記したその瞬間が、我々の「紀元」であります。当初、それは一過性のミスとして笑い飛ばされる運命にありました。しかし、その文字列が持つ圧倒的な「勢い」と「肯定感」に、誰よりも深く魂を揺さぶられた人物がいました。後のガエマス学園初代校長、いちごみるくであります。</p>
+                <p>当時、いちごみるくはその配信者と親交がありました。共にインターネット文化の最前線に立ち、同じ笑いを共有していた間柄でした。しかし、やがて関係は暗転します。ストーカー行為の被害、みずからの動画コンテンツを無断で流用されるといった出来事が重なり、ついには執拗な嫌がらせを受けるに至りました。いちごみるくはすべての縁を断ち切ることを決意。しかし皮肉なことに、その傷の中に「Gaemas」という字体だけは輝き続けていたのです。憎しみではなく、言葉の勢いそのものへの愛着として。</p>
+                <p>20XX年、いちごみるくは「誤読研究会」を発足させます。世界中の打ち間違いを収集し、その背後にある心理メカニズムを分析しました。その結果、最も美しい誤字は「調べようとする知性を放棄した瞬間」に生まれるという結論に達しました。この研究成果に基づき、202X年、ガエマス県誤読市に本校の前身となる「ガエマス私塾」が設立されました。</p>
+                <p>設立当初は「教育の放棄」との批判を浴びましたが、卒業生たちが次々と社会の既成概念を（意図せず）破壊していく様を見て、世論は一変しました。彼らが書く報告書、彼らが発信するメール、それらは「解読不能だが熱い」と評され、効率化に疲弊したビジネス界に新たな風を吹き込んだのです。2025年には文部科学省の特例措置により、専修学校としての認可を受け、「学校法人 ガエマス学園」へと改組されました。</p>
+                <p>現在、本校は世界32カ国に姉妹校を持ち、その教育ネットワークは拡大を続けています。我々は、過去の歴史を尊重しながらも、常に「最新の誤読」を求めて走り続けます。本校の歴史は、正しさに抗い続けた不屈の挑戦者たちの記録であり、これからも諸君らによって書き足されていく未完成の叙事詩なのです。</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>
