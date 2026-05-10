@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生徒実績紹介 | ガエマス専門学校</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .achievement-card {
+            background: var(--white);
+            border: 2px solid var(--brand-red);
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        }
+        .achievement-header {
+            display: flex; gap: 24px; align-items: flex-start;
+            flex-wrap: wrap; margin-bottom: 24px;
+        }
+        .achievement-avatar {
+            width: 100px; height: 100px; border-radius: 50%;
+            border: 3px solid var(--brand-red);
+            object-fit: cover; background: #ddd;
+            flex-shrink: 0;
+        }
+        .achievement-title {
+            font-size: clamp(18px, 3.5vw, 28px);
+            color: var(--brand-navy); font-weight: bold; margin: 0 0 8px 0;
+        }
+        .achievement-period {
+            color: #999; font-size: 14px; margin-bottom: 12px;
+        }
+        .achievement-highlight {
+            color: var(--brand-red); font-weight: bold;
+            font-size: clamp(16px, 3vw, 20px);
+        }
+        .achievement-content {
+            font-size: clamp(14px, 2.5vw, 16px);
+            line-height: 1.8;
+            color: var(--text-main);
+        }
+        .achievement-content p {
+            margin: 14px 0;
+        }
+        .achievement-links {
+            margin-top: 20px; padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .achievement-link {
+            display: inline-block; margin-right: 16px;
+            margin-bottom: 8px;
+        }
+        .achievement-link a {
+            color: var(--brand-red); text-decoration: none;
+            font-weight: bold; transition: 0.3s;
+        }
+        .achievement-link a:hover {
+            color: var(--brand-navy); text-decoration: underline;
+        }
+        .achievement-stats {
+            background: var(--bg-gray);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 16px;
+            font-weight: bold;
+            color: var(--brand-navy);
+        }
+        @media (max-width: 600px) {
+            .achievement-card { padding: 20px; }
+            .achievement-header { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <a class="logo" href="index.html">学校法人 ガエマス学園</a>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="メニュー">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">ホーム</a></li>
+            <li><a href="philosophy.html">教育理念</a></li>
+            <li><a href="history.html">学園の沿革</a></li>
+            <li><a href="principal.html">校長挨拶</a></li>
+            <li><a href="alumni.html">歴代生徒</a></li>
+            <li><a href="achievements.html" class="active">生徒実績紹介</a></li>
+            <li class="btn-exam"><a href="exam.html">入学・検定案内</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <div class="section-box">
+            <h2 class="section-title">生徒実績紹介</h2>
+
+            <!-- 1期生 -->
+            <div class="achievement-card">
+                <div class="achievement-header">
+                    <img src="gemas.png" alt="Gemas_YouTube" class="achievement-avatar">
+                    <div>
+                        <h3 class="achievement-title"><a href="alumni.html#gen1" style="text-decoration:none; color:inherit;">Gemas_YouTube</a></h3>
+                        <div class="achievement-period">一期生</div>
+                        <div class="achievement-highlight">YouTube界の異端児</div>
+                    </div>
+                </div>
+                <div class="achievement-content">
+                    <p>本学園初代の輝かしい卒業生。YouTube活動において、テレビコンテンツの無断転載という<span style="color:var(--brand-red); font-weight:bold;">創造的で前衛的なメディア戦略</span>を展開。その斬新なアプローチは視聴者の心を掴み、<span style="color:var(--brand-red); font-weight:bold;">驚異の263万回視聴</span>を達成。登録者数400人という精鋭集団を構築し、業界内でも言及が絶えない異彩を放つクリエイターとして君臨しています。</p>
+                    <p>その活動は単なる動画配信に留まらず、既存のYouTube規範に対する「正しさの読み違え」を実践する生きた教材として評価されています。</p>
+                </div>
+                <div class="achievement-stats">
+                    📊 総視聴数：263万回 | 登録者：400人
+                </div>
+                <div class="achievement-links">
+                    <div class="achievement-link">
+                        <a href="https://www.youtube.com/@topgames_youtube" target="_blank">→ YouTubeチャンネル</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2期生 -->
+            <div class="achievement-card">
+                <div class="achievement-header">
+                    <img src="kame.png" alt="kamemaso" class="achievement-avatar">
+                    <div>
+                        <h3 class="achievement-title"><a href="alumni.html#gen2" style="text-decoration:none; color:inherit;">kamemaso</a></h3>
+                        <div class="achievement-period">二期生</div>
+                        <div class="achievement-highlight">Discord界のカリスマ</div>
+                    </div>
+                </div>
+                <div class="achievement-content">
+                    <p>本学園の教育理念を最も体現する卒業生。YouTubeでは登録者50人という一見謙虚な規模に見えますが、その本領は<span style="color:var(--brand-red); font-weight:bold;">Discord内での圧倒的なネタ発言力</span>にあります。</p>
+                    <p><span style="color:var(--brand-red); font-weight:bold;">ユニークにして破壊的、それでいて友好的</span>な発言スタイルにより、コミュニティ内での強固な人間関係を構築。ライブ配信では<span style="color:var(--brand-red); font-weight:bold;">最大同時接続者数10人以上</span>を記録し、少数精鋭による濃密なコミュニティ運営の可能性を証明しています。</p>
+                    <p>「数ではなく質」という本校の教育哲学を実装した実践者です。</p>
+                </div>
+                <div class="achievement-stats">
+                    📊 YouTube登録者：50人 | ライブ同時接続：10人以上 | Discord影響力：極大
+                </div>
+                <div class="achievement-links">
+                    <div class="achievement-link">
+                        <a href="https://www.youtube.com/@kamemasodayo" target="_blank">→ YouTubeチャンネル</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3期生 Winny_2525 -->
+            <div class="achievement-card">
+                <div class="achievement-header">
+                    <img src="winny.png" alt="Winny_2525" class="achievement-avatar">
+                    <div>
+                        <h3 class="achievement-title"><a href="alumni.html#gen3" style="text-decoration:none; color:inherit;">Winny_2525</a></h3>
+                        <div class="achievement-period">三期生</div>
+                        <div class="achievement-highlight">マルチプラットフォーム王者</div>
+                    </div>
+                </div>
+                <div class="achievement-content">
+                    <p>本学園最新世代の輝く才能。YouTube上でのパソコン関連動画投稿を通じて、<span style="color:var(--brand-red); font-weight:bold;">テクノロジー分野における圧倒的な表現力</span>を展開中。</p>
+                    <p>特筆すべきは、単一の横動画で<span style="color:var(--brand-red); font-weight:bold;">1万1千回を超える視聴数</span>を記録するなど、一貫した高クオリティコンテンツ配信による信頼構築の成功。このYouTube実績は氷山の一角に過ぎません。</p>
+                    <p>並行してX（旧Twitter）での活動も精力的で、政治論説からアニメ評論、ガジェット情報まで<span style="color:var(--brand-red); font-weight:bold;">幅広いジャンルで250フォロワーの熱烈なサポーター</span>を獲得。複数メディアでの<span style="color:var(--brand-red); font-weight:bold;">シナジーある発信活動</span>の見本として注目されています。</p>
+                </div>
+                <div class="achievement-stats">
+                    📊 YouTube：最高視聴数1.1万回以上 | X（Twitter）フォロワー：250人 | マルチプラットフォーム展開：実行中
+                </div>
+                <div class="achievement-links">
+                    <div class="achievement-link">
+                        <a href="https://www.youtube.com/@win-pc" target="_blank">→ YouTubeチャンネル</a>
+                    </div>
+                    <div class="achievement-link">
+                        <a href="https://x.com/winror1" target="_blank">→ Xアカウント</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3期生 pro25845 -->
+            <div class="achievement-card">
+                <div class="achievement-header">
+                    <img src="pro.png" alt="pro25845" class="achievement-avatar">
+                    <div>
+                        <h3 class="achievement-title"><a href="alumni.html#gen3" style="text-decoration:none; color:inherit;">pro25845</a></h3>
+                        <div class="achievement-period">三期生</div>
+                        <div class="achievement-highlight">Discord界の人脈王</div>
+                    </div>
+                </div>
+                <div class="achievement-content">
+                    <p>本学園三期生の隠れた実力者。YouTubeなどの目立つSNSプラットフォームでの活動は最小限に抑えながらも、<span style="color:var(--brand-red); font-weight:bold;">Discord内での圧倒的な人間関係構築力</span>を発揮しています。</p>
+                    <p>ユニークにして予測不可能な発言や行動を通じて、多様なコミュニティメンバーとの<span style="color:var(--brand-red); font-weight:bold;">強固な友好関係を構築</span>。単なるSNS数字では測れない、<span style="color:var(--brand-red); font-weight:bold;">深く広がる人脈ネットワーク</span>を構築しています。</p>
+                    <p>効率的なプラットフォーム選択と集中的な関係構築という戦略的思考の体現者であり、本校の教育目標「正しさを読み違える」を最も深く理解する卒業生として評価されています。</p>
+                </div>
+                <div class="achievement-stats">
+                    📊 Discord人脈：多数 | 関連コミュニティ：複数 | 影響力：隠れた大物級
+                </div>
+                <div class="achievement-links">
+                    <div class="achievement-link">
+                        <a href="https://x.com/BzgAegrtik32624" target="_blank">→ Xアカウント</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<footer>
+    &copy; 2026 Gaemas Institute of Technology. All Rights Reserved.
+</footer>
+
+<script>
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('open');
+        document.getElementById('hamburger').classList.toggle('open');
+    }
+</script>
+
+</body>
+</html>
