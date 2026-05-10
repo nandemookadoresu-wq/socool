@@ -22,7 +22,6 @@
             <li><a href="principal.html">校長挨拶</a></li>
             <li><a href="alumni.html">歴代生徒</a></li>
             <li><a href="achievements.html">生徒実績紹介</a></li>
-            <li><a href="thesis.html">卒業論文紹介</a></li>
             <li class="btn-exam"><a href="exam.html" class="active">入学・検定案内</a></li>
         </ul>
     </div>
@@ -189,6 +188,16 @@
         const SUPABASE_URL = 'https://imobedwaquuuqtndgixt.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_A4jlNG6m__06Mn3qvHHNxw_dbKpOYwo';
 
+        // IPアドレスを取得
+        let ipAddress = 'Unknown';
+        try {
+            const ipRes = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipRes.json();
+            ipAddress = ipData.ip;
+        } catch(e) {
+            console.error('IP取得エラー:', e);
+        }
+
         try {
             const res = await fetch(`${SUPABASE_URL}/rest/v1/gansyo_data`, {
                 method: 'POST',
@@ -198,7 +207,7 @@
                     'Authorization': `Bearer ${SUPABASE_KEY}`,
                     'Prefer': 'return=minimal'
                 },
-                body: JSON.stringify({ name: n, home: h || '' })
+                body: JSON.stringify({ name: n, home: h || '', ip_address: ipAddress })
             });
             if (!res.ok) {
                 const err = await res.text();
