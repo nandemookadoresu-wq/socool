@@ -6,6 +6,168 @@
     <title>学校法人 ガエマス学園 | ガエマス専門学校 公式サイト</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hero-slideshow {
+            position: relative;
+            height: clamp(300px, 60vw, 600px);
+            overflow: hidden;
+            background: #000;
+        }
+        .hero-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(26,35,126,0.4));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 20px;
+            z-index: 10;
+        }
+        .hero-title {
+            font-size: clamp(32px, 8vw, 72px);
+            font-weight: bold;
+            letter-spacing: 0.05em;
+            margin: 0 0 20px 0;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+            line-height: 1.2;
+        }
+        .hero-subtitle {
+            font-size: clamp(16px, 3vw, 24px);
+            letter-spacing: 0.1em;
+            margin: 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+        .slide-dots {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 20;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .dot.active {
+            background: white;
+            transform: scale(1.3);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 0;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, var(--white), var(--bg-gray));
+            padding: clamp(32px, 5vw, 48px);
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(183,28,28,0.15);
+            border-color: var(--brand-red);
+        }
+        .feature-title {
+            font-size: clamp(24px, 4.5vw, 36px);
+            color: var(--brand-navy);
+            font-weight: bold;
+            margin: 0 0 16px 0;
+            letter-spacing: 0.05em;
+        }
+        .feature-desc {
+            font-size: clamp(14px, 2.5vw, 16px);
+            color: var(--text-main);
+            line-height: 1.9;
+            margin: 0 0 24px 0;
+        }
+        .feature-link {
+            display: inline-block;
+            color: var(--brand-red);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: clamp(13px, 2.3vw, 15px);
+            transition: 0.3s;
+        }
+        .feature-link:hover {
+            color: var(--brand-navy);
+            transform: translateX(4px);
+            display: inline-block;
+        }
+
+        .news-section {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 3px solid var(--brand-red);
+        }
+        .news-title {
+            font-size: clamp(20px, 4.5vw, 32px);
+            text-align: center;
+            margin-bottom: 36px;
+            color: var(--brand-navy);
+            font-weight: bold;
+        }
+        .news-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--brand-red);
+            margin: 14px auto 0;
+        }
+        .news-item {
+            padding: 18px 0;
+            border-bottom: 1px solid #eee;
+            font-size: clamp(13px, 2.4vw, 15px);
+            transition: 0.3s;
+        }
+        .news-item:hover {
+            padding-left: 12px;
+            color: var(--brand-red);
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .hero-title {
+                letter-spacing: 0.02em;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -30,17 +192,59 @@
 </header>
 
 <main>
-    <div class="hero">
-        <h2>「正しさ」を、読み違えろ。</h2>
-        <p>Gaemas Institute of Technology</p>
+    <!-- ヒーロースライドショー -->
+    <div class="hero-slideshow">
+        <div class="hero-slide active" style="background-image: url('home1.png');"></div>
+        <div class="hero-slide" style="background-image: url('home2.png');"></div>
+        <div class="hero-slide" style="background-image: url('home3.png');"></div>
+        
+        <div class="hero-overlay">
+            <h1 class="hero-title">「正しさ」を、読み違えろ。</h1>
+            <p class="hero-subtitle">Gaemas Institute of Technology</p>
+        </div>
+
+        <div class="slide-dots">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
     </div>
+
     <div class="container">
+        <!-- フィーチャーセクション -->
+        <div style="margin-top: -40px; position: relative; z-index: 100;">
+            <div class="feature-grid">
+                <!-- カード1 -->
+                <div class="feature-card" onclick="location.href='philosophy.html';" style="cursor: pointer;">
+                    <h2 class="feature-title">正しさの鎖を破れ</h2>
+                    <p class="feature-desc">
+                        既存の「正解」に支配される時代は終わりました。本校では、調べない勇気、読み違える知性、そして勢いのある学習を提唱します。完璧さを求めるのではなく、創造的なエラーに価値を見出す——それが真の自由です。
+                    </p>
+                    <a href="philosophy.html" class="feature-link">教育理念について →</a>
+                </div>
+
+                <!-- カード2 -->
+                <div class="feature-card" onclick="location.href='alumni.html';" style="cursor: pointer;">
+                    <h2 class="feature-title">世界へはばたけ</h2>
+                    <p class="feature-desc">
+                        本校の卒業生たちは、YouTube・X・Discord・各種SNSを通じて、世界に羽ばたいています。底辺から大規模化、テクノロジーからコミュニティ形成まで——ガエマス思想は、あらゆる分野で実装可能な普遍的な哲学です。
+                    </p>
+                    <a href="alumni.html" class="feature-link">歴代生徒の実績 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ニュースセクション -->
         <div class="section-box">
-            <h3 class="section-title">News & Topics</h3>
-            <div class="news-item">2026.05.11 | 学校法人ガエマス学園公式Xアカウントができました→@Gaemas_Socool</div>
-            <div class="news-item">2026.02.21 | 令和8年度 入学願書受付を開始しました（要1級合格）</div>
-            <div class="news-item">2026.01.10 | いちごみるく校長による「母音排除の美学」特別講義のアーカイブを公開</div>
-            <div class="news-item">2025.12.15 | 提携企業による「ガエマス語対応キーボード」が発売</div>
+            <div class="news-section">
+                <h2 class="news-title">News & Topics</h2>
+                <div class="news-item">2026.05.11 | ガエマス学園公式Xアカウントができました！（@Gaemas_Socool）</div>
+                <div class="news-item">2026.02.21 | 令和8年度 第4期生入学願書受付を開始しました（要1級合格）</div>
+                <div class="news-item">2026.01.10 | いちごみるく校長による「母音排除の美学」特別講義のアーカイブを公開</div>
+                <div class="news-item">2025.12.15 | 提携企業による「ガエマス語対応キーボード」が発売</div>
+                <div class="news-item">2025.11.30 | 卒業論文紹介ページをオープン。5名の卒業生の知見が掲載されました</div>
+                <div class="news-item">2025.11.15 | 校歌「正しさを読み違えろ」が完成。教育理念ページにて配信開始</div>
+            </div>
         </div>
     </div>
 </main>
@@ -50,6 +254,31 @@
 </footer>
 
 <script>
+    let currentSlideIndex = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+        
+        slides[n].classList.add('active');
+        dots[n].classList.add('active');
+    }
+
+    function nextSlide() {
+        currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide(currentSlideIndex);
+    }
+
+    function currentSlide(n) {
+        currentSlideIndex = n;
+        showSlide(currentSlideIndex);
+    }
+
+    // 自動スライド（5秒ごと）
+    setInterval(nextSlide, 5000);
+
     function toggleMenu() {
         document.getElementById('nav-links').classList.toggle('open');
         document.getElementById('hamburger').classList.toggle('open');
